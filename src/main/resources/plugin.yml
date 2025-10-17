@@ -1,0 +1,25 @@
+name: TopsSystem
+version: 1.0.0
+main: com.flyaway.tops.TopsPlugin
+api-version: 1.21
+description: Top players ranking system
+softdepend: [AuraSkills, TimeReward, TrackPlayer, CoinsEngine]
+load: POSTWORLD
+author: FlyAwayMaking
+website: https://github.com/flyawaymaking
+
+commands:
+  tops:
+    description: Open tops GUI or manage tops
+    usage: /<command> [reload|rewards]
+
+permissions:
+  topssystem.reload:
+    description: Allows to reload tops configuration
+    default: op
+  topssystem.rewards:
+    description: Allows to force distribute rewards
+    default: op
+  topssystem.exclude:
+    description: Exclude from leaderboard
+    default: op
