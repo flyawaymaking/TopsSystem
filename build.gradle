@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.flyaway.tops'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "papermc"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven { url = uri('https://repo.lucko.me/')}
+    maven { url = 'https://repo.nightexpressdev.com/releases'}
+    maven { url = 'https://jitpack.io' }
+}
+
+dependencies {
+    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
+    compileOnly("dev.aurelium:auraskills-api-bukkit:2.3.7")
+    compileOnly("net.luckperms:api:5.4")
+    compileOnly("su.nightexpress.coinsengine:CoinsEngine:2.5.0")
+    compileOnly 'com.github.flyawaymaking:TimeReward:master-SNAPSHOT'
+    compileOnly 'com.github.flyawaymaking:TrackPlayer:master-SNAPSHOT'
+
+    // Только Gson - он легкий и безопасен
+    implementation 'com.google.code.gson:gson:2.10.1'
+}
+
+tasks.jar {
+    archiveBaseName.set("TopsSystem")
+}

@@ -1,0 +1,226 @@
+# Настройки GUI
+gui:
+  title: "🏆 Топы игроков"
+  size: 54
+  filler_item: "GRAY_STAINED_GLASS_PANE"
+
+# Настройки кэша
+cache:
+  # Длительность кэша в минутах
+  duration_minutes: 15
+
+# Настройки отправки статистики
+stats:
+  # Включить отправку статистики на сервер
+  enabled: false
+  # URL API сервера для отправки статистики
+  api_url: "http://127.0.0.1/tops/update/"
+  # API ключ для авторизации
+  api_key: "your_key"
+
+# Настройки наград
+rewards:
+  # Валюта для выдачи наград (должна существовать в CoinsEngine)
+  currency: "coins"
+
+  # Время выдачи наград (формат: "DAY_OF_WEEK HH:mm")
+  distribution_time: "SUNDAY 18:00"
+
+  # Награды за позиции (позиция: количество_валюты)
+  position_rewards:
+    1: 250
+    2: 150
+    3: 100
+    # Можно добавить больше позиций:
+    # 4: 50
+    # 5: 25
+
+# Категории топа - Расскоментируйте и отредактируйте нужные вам позиции, также можно добавлять для других скиллов/валют
+categories:
+  # CoinsEngine - топы по валютам
+#  coins_engine_coins:
+#    display_name: "§eТоп по балансу коинов §6⛂"
+#    slot: 9
+#    item: "PLAYER_HEAD"
+#    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWJkYTVmMzE5MzdiMmZmNzU1MjcxZDk3ZjAxYmU4NGQ1MmE0MDdiMzZjYTc3NDUxODU2MTYyYWM2Y2ZiYjM0ZiJ9fX0="
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваши коины: %player_level%"
+#
+#  coins_engine_money:
+#    display_name: "§eТоп по балансу денег §a$"
+#    slot: 10
+#    item: "PLAYER_HEAD"
+#    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjBmZmFkMzNkMjkzYjYxNzY1ZmM4NmFiNTU2MDJiOTU1YjllMWU3NTdhOGU4ODVkNTAyYjNkYmJhNTQyNTUxNyJ9fX0="
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваши деньги: %player_level%"
+
+  # TimeReward - топы по времени игры
+#  playtime_total:
+#    display_name: "§eТоп по времени (общий)"
+#    slot: 11
+#    item: "PLAYER_HEAD"
+#    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODVmYTBhM2EyZDYyZDdkMTE3MWQ0OGIzYWU4ZmNiNTUxZjZmYWNjYzcwY2VlNDBmNDRjNzY3YzNkYTdiNzg1ZiJ9fX0="
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - "§7(время §cAFK §7- не учитывается)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваше время: %player_level%"
+#
+#  playtime_weekly:
+#    display_name: "§eТоп по времени (неделя)"
+#    slot: 18
+#    item: "PLAYER_HEAD"
+#    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmNiOGYwNjg4NWQxZGFhZmQyNmNkOTViMzQ4MmNiNTI1ZDg4MWE2N2UwZDI0NzE2MWI5MDhkOTNkNTZkMTE0ZiJ9fX0="
+#    lore_template:
+#      - "§7      (за неделю)"
+#      - "§7(время §cAFK §7- не учитывается)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваше время: %player_level%"
+
+  # TrackPlayer - топы по убийствам мобов
+#  mob_kills:
+#    display_name: "§eТоп по убийствам монстров"
+#    slot: 19
+#    item: "PLAYER_HEAD"
+#    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjJhMWZkMmQ3Y2ZiZGQyYThkOWIzZjgxZjczMTI3MDViODlhNDRkMzhiODQxMDExYTdlNzllYTZiOWJjODU4NCJ9fX0="
+#    lore_template:
+#      - "§7      (за неделю)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваши убийства мобов: %player_level%"
+
+  # AuraSkills - топы по навыкам
+#  aura_skills_farming:
+#    display_name: "§eТоп по уровню скилла Фермер"
+#    slot: 14
+#    item: "IRON_HOE"
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваш уровень: %player_level%"
+#
+#  aura_skills_foraging:
+#    display_name: "§eТоп по уровню скилла Лесоруб"
+#    slot: 15
+#    item: "IRON_AXE"
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваш уровень: %player_level%"
+#
+#  aura_skills_mining:
+#    display_name: "§eТоп по уровню скилла Шахтёр"
+#    slot: 16
+#    item: "IRON_PICKAXE"
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваш уровень: %player_level%"
+#
+#  aura_skills_fighting:
+#    display_name: "§eТоп по уровню скилла Борец"
+#    slot: 17
+#    item: "IRON_SWORD"
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваш уровень: %player_level%"
+#
+#  aura_skills_archery:
+#    display_name: "§eТоп по уровню скилла Лучник"
+#    slot: 23
+#    item: "BOW"
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваш уровень: %player_level%"
+#
+#  aura_skills_excavation:
+#    display_name: "§eТоп по уровню скилла Сельхоз"
+#    slot: 24
+#    item: "IRON_SHOVEL"
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваш уровень: %player_level%"
+#
+#  aura_skills_enchanting:
+#    display_name: "§eТоп по уровню скилла Зачарователь"
+#    slot: 25
+#    item: "ENCHANTING_TABLE"
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваш уровень: %player_level%"
+#
+#  aura_skills_fishing:
+#    display_name: "§eТоп по уровню скилла Рыбак"
+#    slot: 26
+#    item: "FISHING_ROD"
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваш уровень: %player_level%"
+#
+#  aura_skills_defense:
+#    display_name: "§eТоп по уровню скилла Защитник"
+#    slot: 33
+#    item: "CHAINMAIL_CHESTPLATE"
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваш уровень: %player_level%"
+#
+#  aura_skills_alchemy:
+#    display_name: "§eТоп по уровню скилла Алхимия"
+#    slot: 34
+#    item: "POTION"
+#    potion_type: "HEAL"
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваш уровень: %player_level%"
+#
+#  aura_skills_agility:
+#    display_name: "§eТоп по уровню скилла Ловкость"
+#    slot: 35
+#    item: "FEATHER"
+#    lore_template:
+#      - "§7      (за всё время)"
+#      - ""
+#      - "%top_players%"
+#      - ""
+#      - "§7Ваш уровень: %player_level%"
