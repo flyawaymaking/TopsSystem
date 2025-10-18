@@ -49,7 +49,7 @@ public class ConfigManager {
         this.rewardTime = config.getString("rewards.distribution_time", "SUNDAY 18:00");
 
         // Загрузка настроек статистики
-        this.statsEnabled = config.getBoolean("stats.enabled", true);
+        this.statsEnabled = config.getBoolean("stats.enabled", false);
         this.statsApiUrl = config.getString("stats.api_url", "http://192.168.0.120:8000/tops/update/");
         this.statsApiKey = config.getString("stats.api_key", "Sel9C5POak1sL.08zWQ64q3_B");
 

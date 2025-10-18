@@ -76,6 +76,7 @@ public class TopManager {
     }
 
     private void sendTopStatsToServer() {
+        if (!configManager.isStatsEnabled()) return;
         List<TopCategory> categories = getAllCategories();
         statsSender.sendTopStats(categories).thenAccept(success -> {
             if (!success) {
