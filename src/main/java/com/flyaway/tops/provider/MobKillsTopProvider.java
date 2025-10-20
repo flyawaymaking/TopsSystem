@@ -50,9 +50,6 @@ public class MobKillsTopProvider implements TopDataProvider {
 
             // Получаем имя игрока
             String playerName = TopProviderUtils.getPlayerName(uuid);
-            if (playerName == null) {
-                continue;
-            }
 
             String displayValue = formatKills(mobKills);
             topPlayers.add(new TopPlayer(uuid, playerName, displayValue, mobKills));

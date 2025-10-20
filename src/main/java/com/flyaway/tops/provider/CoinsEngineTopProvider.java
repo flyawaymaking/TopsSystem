@@ -47,7 +47,8 @@ public class CoinsEngineTopProvider implements TopDataProvider {
             double balance = CoinsEngineAPI.getBalance(uuid, currencyObj);
 
             String displayValue = formatDisplay(balance, currencyObj);
-            list.add(new TopPlayer(uuid, offline.getName(), displayValue, balance));
+            String playerName = TopProviderUtils.getPlayerName(uuid);
+            list.add(new TopPlayer(uuid, playerName, displayValue, balance));
         }
 
         return list.stream()

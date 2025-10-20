@@ -6,7 +6,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class TopProviderUtils {
     private static final LuckPerms luckPerms = Bukkit.getServicesManager().load(LuckPerms.class);
@@ -46,15 +54,33 @@ public class TopProviderUtils {
         // Сначала проверяем онлайн игроков
         Player onlinePlayer = Bukkit.getPlayer(uuid);
         if (onlinePlayer != null) {
-            return onlinePlayer.getName();
+            String name = onlinePlayer.getName();
+            if (name != null) return name;
         }
 
         // Затем проверяем оффлайн игроков
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-        if (offlinePlayer.getName() != null) {
-            return offlinePlayer.getName();
+        if (offlinePlayer != null) {
+            String name = offlinePlayer.getName();
+            if (name != null) return name;
         }
 
+        return getNameFromUserCache(uuid);
+    }
+
+    public static String getNameFromUserCache(UUID uuid) {
+        File cache = new File(Bukkit.getWorldContainer(), "usercache.json");
+        if (!cache.exists()) return null;
+        try {
+            String json = Files.readString(cache.toPath(), StandardCharsets.UTF_8);
+            JsonArray arr = JsonParser.parseString(json).getAsJsonArray();
+            for (JsonElement element : arr) {
+                JsonObject entry = element.getAsJsonObject();
+                if (UUID.fromString(entry.get("uuid").getAsString()).equals(uuid)) {
+                    return entry.get("name").getAsString();
+                }
+            }
+        } catch (Exception ignored) {}
         return null;
     }
 }

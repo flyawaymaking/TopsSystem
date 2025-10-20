@@ -72,7 +72,8 @@ public class AuraSkillsTopProvider implements TopDataProvider {
             playerXpMap.put(uuid, xp);
 
             String disp = formatDisplay(level);
-            list.add(new TopPlayer(uuid, offline.getName(), disp, level));
+            String playerName = TopProviderUtils.getPlayerName(uuid);
+            list.add(new TopPlayer(uuid, playerName, disp, level));
         }
 
         // Сортируем сначала по уровню (убывание), потом по опыту (убывание)

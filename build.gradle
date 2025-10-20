@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.flyaway.tops'
-version = '1.0.1'
+version = '1.0.2'
 
 java {
     toolchain {
@@ -36,4 +36,14 @@ dependencies {
 
 tasks.jar {
     archiveBaseName.set("TopsSystem")
+}
+
+tasks.processResources {
+    filesMatching("plugin.yml") {
+        expand(
+            version: project.version,
+            name: project.name,
+            group: project.group
+        )
+    }
 }

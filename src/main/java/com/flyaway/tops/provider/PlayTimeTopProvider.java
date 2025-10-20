@@ -45,9 +45,6 @@ public class PlayTimeTopProvider implements TopDataProvider {
 
             // Получаем имя игрока
             String playerName = TopProviderUtils.getPlayerName(uuid);
-            if (playerName == null) {
-                continue;
-            }
 
             String displayValue = formatTime(playtime);
             topPlayers.add(new TopPlayer(uuid, playerName, displayValue, playtime));

@@ -1,6 +1,6 @@
-name: TopsSystem
-version: 1.0.1
-main: com.flyaway.tops.TopsPlugin
+name: ${name}
+version: ${version}
+main: ${group}.TopsPlugin
 api-version: 1.21
 description: Top players ranking system
 softdepend: [AuraSkills, TimeReward, TrackPlayer, CoinsEngine]
