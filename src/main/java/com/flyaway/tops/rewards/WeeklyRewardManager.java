@@ -14,6 +14,7 @@ import su.nightexpress.coinsengine.api.CoinsEngineAPI;
 import su.nightexpress.coinsengine.api.currency.Currency;
 
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -27,11 +28,13 @@ public class WeeklyRewardManager {
     private final TopManager topManager;
     private final ConfigManager configManager;
     private BukkitTask weeklyTask;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
 
     public WeeklyRewardManager(TopsPlugin plugin, TopManager topManager) {
         this.plugin = plugin;
         this.topManager = topManager;
         this.configManager = plugin.getConfigManager();
+        checkMissedRewardDistribution();
         startWeeklyRewardTask();
     }
 
@@ -49,6 +52,42 @@ public class WeeklyRewardManager {
                 distributeWeeklyRewards();
             }
         }.runTaskTimerAsynchronously(plugin, calculateInitialDelay(), TimeUnit.DAYS.toSeconds(7) * 20L);
+    }
+
+    private void saveLastRewardTime() {
+        plugin.getConfig().set("last-reward-time", LocalDateTime.now().format(FORMATTER));
+        plugin.saveConfig();
+        plugin.getLogger().info("💾 Дата последней выдачи обновлена в config.yml");
+    }
+
+    private void checkMissedRewardDistribution() {
+        String lastRewardStr = plugin.getConfig().getString("last-reward-time", null);
+        if (lastRewardStr == null || lastRewardStr.isEmpty()) {
+            plugin.getLogger().info("⏳ Награды ещё не выдавались — пропускаем проверку.");
+            return;
+        }
+
+        try {
+            LocalDateTime lastRewardTime = LocalDateTime.parse(lastRewardStr, FORMATTER);
+            Duration since = Duration.between(lastRewardTime, LocalDateTime.now());
+
+            if (since.toDays() >= 7) {
+                plugin.getLogger().warning("⚠️ Прошло более недели с последней выдачи (" + lastRewardStr + "). Запускаем выдачу через 30 секунд!");
+
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        distributeWeeklyRewards();
+                    }
+                }.runTaskLaterAsynchronously(plugin, 30 * 20L);
+
+            } else {
+                plugin.getLogger().info("✅ Последняя выдача наград была " + lastRewardStr + " (" + since.toDays() + " дн. назад)");
+            }
+
+        } catch (Exception e) {
+            plugin.getLogger().warning("Ошибка чтения даты последней выдачи: " + e.getMessage());
+        }
     }
 
     private long calculateInitialDelay() {
@@ -96,16 +135,8 @@ public class WeeklyRewardManager {
     public void distributeWeeklyRewards() {
         plugin.getLogger().info("Начало распределения еженедельных наград...");
 
-        // Принудительно обновляем кэш топов перед распределением наград
-        topManager.forceUpdateCache();
-
-        // Даем время на обновление данных
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                processRewardDistribution();
-            }
-        }.runTaskLaterAsynchronously(plugin, 5 * 20L); // 5 секунд для обновления данных
+        topManager.forceUpdateCache(); // Принудительно обновляем кэш топов перед распределением наград
+        processRewardDistribution(); // Выдаём награды
     }
 
     private void processRewardDistribution() {
@@ -126,6 +157,9 @@ public class WeeklyRewardManager {
 
         // Логируем детали распределения
         logRewardDistribution(allRewards);
+
+        // Записываем время выдачи наград
+        saveLastRewardTime();
     }
 
     private List<RewardResult> distributeRewardsForCategory(TopCategory category) {
