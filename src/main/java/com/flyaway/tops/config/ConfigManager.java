@@ -28,6 +28,7 @@ public class ConfigManager {
     private String statsApiUrl;
     private String statsApiKey;
     private long cacheDuration;
+    private List<String> categoryPreLore;
 
     private final Map<String, CategoryConfig> categories = new HashMap<>();
 
@@ -43,6 +44,7 @@ public class ConfigManager {
         this.guiTitle = config.getString("gui.title", "🏆 Топы игроков");
         this.guiSize = config.getInt("gui.size", 54);
         this.fillerItem = Material.matchMaterial(config.getString("gui.filler_item", "GRAY_STAINED_GLASS_PANE"));
+        this.categoryPreLore = config.getStringList("gui.category_pre_lore");
 
         // Загрузка настроек наград
         this.rewardCurrency = config.getString("rewards.currency", "coins");
@@ -135,6 +137,7 @@ public class ConfigManager {
     public String getRewardTime() { return rewardTime; }
     public Map<Integer, Integer> getPositionRewards() { return positionRewards; }
     public List<Integer> getRewardPositions() { return rewardPositions; }
+    public List<String> getCategoryPreLore() { return categoryPreLore; }
     public int getRewardForPosition(int position) {
         return positionRewards.getOrDefault(position, 0);
     }

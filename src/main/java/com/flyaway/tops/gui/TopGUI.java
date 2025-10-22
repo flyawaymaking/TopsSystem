@@ -96,9 +96,7 @@ public class TopGUI {
             if (line.contains("%top_players%")) {
                 // Добавляем информацию о наградах перед списком игроков
                 String currencySymbol = configManager.getCurrencySymbol();
-                lore.add("§7Топ игроки получают §6" + currencySymbol);
-                lore.add("§7каждое воскресенье в §e" + configManager.getRewardTime());
-                lore.add("");
+                lore.addAll(configManager.getCategoryPreLore());
 
                 // Заменяем на топ игроков
                 for (int i = 0; i < Math.min(10, topPlayers.size()); i++) {
